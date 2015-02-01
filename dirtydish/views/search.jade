@@ -1,0 +1,27 @@
+block content
+  h1=title
+  p searching for 
+     b #{search}
+
+  if errors
+    each error in errors
+      div.alert.alert-danger
+        span #{error.error}
+
+  form.search-form.form-horizental(method='post', role='form', action='/search')
+    div.form.-group
+      label.col-sm-4 Search
+      div.col-sm-8
+        input.form-control(name='search', type='text', placeholder='Search Something...', value=search)
+
+    div.form-group
+      div.col-sm-offset-4.col-sm-8
+        button.login.btn.btn-primary(type='submit') Search
+
+    div.results
+      ul
+        - for (var i=0; i<results.length; i++)
+          li 
+            a(href='/restaurant/'+results[i].id)= results[i].name
+            span #{results[i].street_address}
+            span #{results[i].phone}

@@ -1,0 +1,41 @@
+block content
+  h1=title
+  p #{description}
+ 
+  if errors
+    each error in errors
+      div.alert.alert-danger
+        span #{error.error}
+
+  div.container
+    h2= jd.name
+    p #{jd.street_address}
+    p #{jd.postal_code}
+    p #{jd.phone}
+    p #{jd.website_url}
+
+  - if(jd.menus.length>0)
+    - for(var a=0; a<jd.menus.length; a++)
+       h1 #{jd.menus[0].menu_name}
+       - for(var i=0; i<jd.menus[0].sections.length; i++)
+         - var sec = jd.menus[0].sections[i]; 
+         hr
+         h2= sec.section_name
+         - for(var j=0; j<sec.subsections.length; j++)
+          - var subs = sec.subsections[j];
+            h3= subs.subsection_name
+            - for(var k=0; k<subs.contents.length; k++)
+              - var c = subs.contents[k];
+              hr
+              - if(c.name!=undefined)
+                h4= c.name
+              - if(c.text!=undefined)
+                 p #{c.text}
+              - if(c.description!=undefined)
+                  span #{c.description}
+              - if(c.option_groups!=undefined)
+                  p #{c.option_groups[0].text}: 
+                    - for(var l=0; l<c.option_groups[0].options.length; l++)
+                        span #{c.option_groups[0].options[l].name},
+
+

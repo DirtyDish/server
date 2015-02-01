@@ -1,0 +1,32 @@
+var express = require('express');
+var router = express.Router();
+var http = require('http');
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'DirtyDish', description: 'DirtyDish is on its way!!!' });
+});
+
+router.post('/search', function(req, res, next) {
+  var search = req.body.search;
+  var locu = 'https://api.locu.com/v1_0/venue/search/?name='+search+'&locality=toronto&api_key=3bcdf4f86e625369901fe9258e924c83105cdafa';
+  
+
+var client = http.createClient(80, locu);
+request = client.request();
+request.on('response', function( res2 ) {
+    res2.on('data', function( data ) {
+
+
+        console.log( data.toString() );
+        res.render('search', { title: 'DirtyDish', description: 'DirtyDish is on its way!!!', search: search });
+    } );
+} );
+request.on('error', function (e) {
+    console.log(e.message);
+});
+request.end();
+
+});
+
+module.exports = router;

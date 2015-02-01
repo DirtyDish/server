@@ -1,0 +1,21 @@
+block content
+  h1=title
+  p #{description}
+ 
+  if errors
+    each error in errors
+      div.alert.alert-danger
+        span #{error.error}
+
+  form.search-form.form-horizental(method='post', role='form', action='/search')
+    div.form.-group
+      label.col-sm-4 Search
+      div.col-sm-8
+        input.form-control(name='search', type='text', placeholder='Search Something...')
+
+    div.form-group
+      div.col-sm-offset-4.col-sm-8
+        button.login.btn.btn-primary(type='submit') Search
+
+
+
