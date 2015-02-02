@@ -41,10 +41,13 @@ router.post('/search', function(req, res, next) {
     path: '/v1_0/venue/search/?name='+search+'&locality=toronto&api_key=3bcdf4f86e625369901fe9258e924c83105cdafa',
     method: 'GET'
   };
+  var str = '';
   var req2 = https.request(options, function(res2){
 	res2.on('data', function(d){
-		var jd = JSON.parse(d);
-		
+		str += d;
+	});
+	res2.on('end', function(){
+		var jd = JSON.parse(str);
 		res.render('search', { title: 'DirtyDish', results: jd.objects, search: search });
 	});
   });
