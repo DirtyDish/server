@@ -8,6 +8,22 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/restaurant/:v', function(req, res, next) {
+/*
+req.getConnection(function(err,conn){
+
+        if (err) return next("Cannot Connect");
+
+        var query = conn.query("SELECT * FROM testtable ", function(err,rows){
+
+            if(err){
+                console.log(err);
+                return next("Mysql error, check your query");
+            }
+		res.render('index', { title: rows[0].fn, description: ''});
+        });
+
+    });
+*/
   var v = req.param("v");
   var locu = 'api.locu.com';
   var options = {
